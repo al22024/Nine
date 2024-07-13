@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/pleiades/2023-09/workspace/Nine/webapp/WEB-INF/lib/org.json-20130603.jar/jakarta.servlet-api-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/pleiades/2023-09/workspace/Nine/webapp/WEB-INF/lib/org.json-20130603.jar/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/pleiades/2023-09/workspace/Nine/webapp/WEB-INF/lib/org.json-20130603.jar/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/pleiades/2023-09/workspace/Nine/webapp/WEB-INF/lib/org.json-20130603.jar/org.json-20130603.jar"/>
+	<classpathentry kind="lib" path="C:/pleiades/2023-09/workspace/Nine/webapp/WEB-INF/lib/org.json-20130603.jar/postgresql-42.7.3.jar"/>
+	<classpathentry kind="lib" path="C:/pleiades/2023-09/workspace/Nine/webapp/WEB-INF/lib/org.json-20130603.jar/servlet-api.jar"/>
+	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
+</classpath>
