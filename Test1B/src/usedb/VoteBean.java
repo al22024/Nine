@@ -1,6 +1,5 @@
 package usedb;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +14,15 @@ public class VoteBean implements Serializable {
 	private String review = "";
 	private String dateTime ="";
 	private List<List<String>> voterList = new ArrayList<>();
+	private String isExist = "True";;
+	
+	public void setIsExist(String isExist) {
+		this.isExist = isExist;
+	}
+	
+	public String getIsExist() {
+		return isExist;
+	}
 	
 	public void setGenre(int userID, int projectID){
 		UserAndProjectInfo upinfo = new UserAndProjectInfo();
@@ -53,9 +61,13 @@ public class VoteBean implements Serializable {
 	}
 	
 	public void setDateTime(int projectID){
-		ProjectInfo pinfo = new ProjectInfo(projectID);
-        Timestamp tim = pinfo.dateTime;
-		this.dateTime = tim.toString();
+//		ProjectInfo pinfo = new ProjectInfo();
+//        Timestamp tim = pinfo.getProjectInfo(projectID).dateTime;
+		String  tim = new ProjectInfo(projectID).dateTime.toString();
+		String[] tmp = tim.split("-");
+		this.dateTime += tmp[0] + "/" + tmp[1] + "/" + tmp[2].split(" ")[0];
+//        SimpleDateFormat dateTimeString = new SimpleDateFormat("yyyy/mm/dd");
+//		this.dateTime = dateTimeString.format(tim);
 	}
 	
 	public String getDateTime(){

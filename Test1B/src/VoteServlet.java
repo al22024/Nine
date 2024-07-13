@@ -21,10 +21,8 @@ public class VoteServlet extends HttpServlet {
 	    HttpSession session = request.getSession(true);
 	    session.setAttribute("userID", 1);
 	    session.setAttribute("projectID", 1);
-	    //int userID = (int)session.getAttribute("userID");
-	    //int projectID = (int)session.getAttribute("projectID");
-	    int userID = 1;
-	    int projectID = 1;
+	    int userID = (int)session.getAttribute("userID");
+	    int projectID = (int)session.getAttribute("projectID");
 	    
 	    UserAndProjectInfo upinfo = new UserAndProjectInfo();
 	    ProjectInfo pinfo = new ProjectInfo();
@@ -46,7 +44,8 @@ public class VoteServlet extends HttpServlet {
 	    vb.setReview(userID, projectID);
 	    vb.setDateTime(projectID);
 	    vb.setVoterList(projectID);
-	    request.setAttribute("vb", vb);        
+	    request.setAttribute("vb", vb);  
+	    
 	    	    
 	    if(pinfo.getProjectInfo(projectID).managerID != userID) {	        
 	        String url="/checkVoteMember.jsp";

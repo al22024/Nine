@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import dbtest.ProjectInfo;
 import display.DisplayBean;
 import display.DisplayEventsBean;
+import usedb.VoteBean;
 
 public class ServletForDisplay extends HttpServlet {
 
@@ -26,7 +27,7 @@ public class ServletForDisplay extends HttpServlet {
     	ProjectInfo pi = new ProjectInfo(projectID);
     	pi.progressStatus = "Searching";
     	pi.updateProjectInfo();
-    	if (false/*ISEVENT.equals("0")*/) {
+    	if (ISEVENT.equals("0")) {
     		// Beanを作る（「名前」から「メッセージ」を作る）
         	DisplayBean display = new DisplayBean();
         	display.makeList(projectID);
@@ -52,11 +53,21 @@ public class ServletForDisplay extends HttpServlet {
     		//イベント検索用メソッドの追加とjsp等への遷移の追加やれ
     		DisplayEventsBean deb = new DisplayEventsBean();
     		deb.makeList(projectID);
-    		session.setAttribute("deb", deb);
-    		String url="/DisplayEvents.jsp";
-        	RequestDispatcher dispatcher
-                       = getServletContext().getRequestDispatcher(url);
-        	dispatcher.forward(request, response);
+//    		System.out.println("is event list empty?" + deb.event.isEmpty());
+    		if(deb.event.isEmpty()) {
+    			VoteBean vb = new VoteBean();
+    			vb.setIsExist("False");
+    			String url = "/checkVoteManager.jsp";
+    			RequestDispatcher dispatcher
+                = getServletContext().getRequestDispatcher(url);
+    				dispatcher.forward(request, response);
+    		}else {
+	    		session.setAttribute("deb", deb);
+	    		String url="/DisplayEvents.jsp";
+	        	RequestDispatcher dispatcher
+	            = getServletContext().getRequestDispatcher(url);
+	        					dispatcher.forward(request, response);
+    		}
     	}
 
     	

@@ -16,8 +16,9 @@
    String budget1 = vb.getBudget1();
    String budget2 = vb.getBudget2();
    String review = vb.getReview();
-   String month = dateTime.substring(5, 7);
-   String date = dateTime.substring(8, 10); 
+   String month = dateTime.split("/")[1];
+   String date = dateTime.split("/")[2]; 
+   String isExist = vb.getIsExist();
 %>
 
 <html>
@@ -66,6 +67,11 @@
 
                 <!--投票内容修正ボタンの追加-->
                 <button id="vote" onclick="history.back()">投票内容修正</button>
+                <%
+                	if(isExist.equals("False")){
+                		out.println("<p>投票された結果でイベントが見つかりませんでした。<br>参加者に再投票を呼びかけてください。</p>");
+                	}
+                %>
             </div>
 
             <!--投票状況を確認する部分を追加(画面の右半分)-->
