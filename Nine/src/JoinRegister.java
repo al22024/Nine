@@ -55,8 +55,13 @@ public class JoinRegister {
 		return string;
 	}
 	public void disposeData(JSONObject requestBody) {
-		int projectID = ((Number) requestBody.get("projectID")).intValue();
-		int userID = ((Number) requestBody.get("userID")).intValue();
+		int projectID = Integer.parseInt((String) requestBody.get("projectID"));
+		int userID = Integer.parseInt((String) requestBody.get("userID"));
+		
+		//userIDとprojectIDを持つデータをDBから削除する。
+		UserAndProjectInfo userAndProjectInfo = new UserAndProjectInfo();
+		userAndProjectInfo.deleteUserAndProjectInfo(userID, projectID);
+		
 		 // jsonDataListからprojectIDを持つJSONObjectを検索
         for (JSONObject data : (Iterable<JSONObject>) MyServlet.jsonDataList) {
             Number existingProjectIDNumber = (Number) data.get("projectID");
