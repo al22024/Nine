@@ -157,4 +157,23 @@ public class ProjectInfo {
             e.printStackTrace();
         }
     }
+    
+	//ProjectID、更新するフィールド、更新する値を渡すとテーブルを更新するメソッド
+	public void updateProjectInfo(int projectID, String updatefield, String value) {
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection con = DriverManager.getConnection(url, user, passWord);
+
+            String sql = "UPDATE ProjectsTableNinth SET " + updatefield + "=? WHERE ProjectID=" +projectID;
+            PreparedStatement prestmt = con.prepareStatement(sql);
+
+            prestmt.setString(1, value);
+
+            prestmt.executeUpdate();
+            prestmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

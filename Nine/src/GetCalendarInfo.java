@@ -147,7 +147,7 @@ public class GetCalendarInfo {
 			else if (status == 1) {
 				if (resSplit[i].equals("timeMax")) {
 					OffsetDateTime endTime = OffsetDateTime.parse(resSplit[i + 2]);
-					busyDays += endTime.atZoneSameInstant(timeZone).toLocalDate().toString() + " ";
+					busyDays += endTime.atZoneSameInstant(timeZone).toLocalDate().toString() + ",";
 					status = 2;
 				}
 				

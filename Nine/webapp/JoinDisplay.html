@@ -207,7 +207,32 @@
 
 		// 締め切りボタンをクリックしたときの処理
 		document.getElementById('closeButton').addEventListener('click', function () {
-			window.location.href = '/Nine/Home.html';
+
+			const projectID = sessionStorage.getItem('projectID');
+			const url = `http://localhost:8080/Nine/api/data`;
+			const requestData = {
+				action: 'close',
+				projectID: projectID,
+			};
+			fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(requestData)
+			})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					window.location.replace(response.url);
+				})
+				.then(data => {
+				})
+				.catch(error => {
+					console.error('Error declining project:', error);
+					alert('移動中にエラーが発生しました。');
+				});
 		});
 
 		// 企画破棄ボタンをクリックしたときの処理
@@ -261,7 +286,7 @@
 					if (!response.ok) {
 						throw new Error('Network response was not ok');
 					}
-					
+
 					return response.json();
 				})
 				.then(data => {

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -70,6 +71,54 @@ public class MyServlet extends HttpServlet {
                 joinRegister.disposeData(requestData);
             }
 
+            else if("move".equals(action)){
+            	int projectID = ((Number)requestData.get("projectID")).intValue();
+             	int userID = Integer.parseInt((String)requestData.get("userID"));
+            	HttpSession session = request.getSession();
+ 				session.setAttribute("projectID", projectID);
+            	ProjectInfo cons = new ProjectInfo();
+            	ProjectInfo project = cons.getProjectInfo(projectID);
+            	String progressstatus = project.progressstatus;
+            	UserAndProjectInfo userandprojectinfo =new UserAndProjectInfo();
+            	UserAndProjectInfo user = userandprojectinfo.getVoteInfo(projectID,userID);
+            	String genre = user.genre;
+            	if("Registration".equals(progressstatus)){
+            		//(締め切り画面へ遷移)
+            		if (project.managerID == userID) {
+            			String closingUrl = "/Nine/JoinDisplay.html";
+            			response.sendRedirect(closingUrl);
+            		}
+            	}else if("Matching".equals(progressstatus)){
+            		//(日程画面へ遷移)
+            		if (project.managerID == userID) {
+            			String schedule_AdjustUrl = "/Nine/servlet/Schedule_Adjust/";
+            			response.sendRedirect(schedule_AdjustUrl);
+            		}
+            	}else if("Searching".equals(progressstatus)){
+            		//(検索画面へ遷移)
+            	}else if("Voting".equals(progressstatus)){
+            		if(genre==null){
+            			//(投票画面へ遷移)
+            		}else{
+            			//(投票修正画面へ遷移)
+            		}
+            	}else if("Notification".equals(progressstatus)){
+            		//(決定画面へ遷移)
+            	}
+            //締め切り操作による遷移
+           }	else if("close".equals(action)){
+           		int projectID = Integer.parseInt((String) requestData.get("projectID"));
+           		HttpSession session = request.getSession();
+           		session.setAttribute("projectID", projectID);
+           		ProjectInfo cons = new ProjectInfo();
+            	ProjectInfo project = cons.getProjectInfo(projectID);
+            	project.updateProjectInfo(projectID, "progressstatus", "Matching");
+            	//(日程画面へ遷移)
+            	String schedule_AdjustUrl = "/Nine/servlet/Schedule_Adjust/";
+        		response.sendRedirect(schedule_AdjustUrl);
+           }
+            
+            
             String jsonResponseString = jsonResponse.toJSONString();
             response.setContentType("application/json");
             response.setHeader("Access-Control-Allow-Origin", "*");

@@ -28,9 +28,16 @@
       <servlet-class>NickNameServlet</servlet-class>
     </servlet>
 
+
     <servlet>
         <servlet-name>MyServlet</servlet-name>
         <servlet-class>MyServlet</servlet-class>
+    </servlet>
+
+
+    <servlet>
+        <servlet-name>Schedule_Adjust</servlet-name>
+        <servlet-class>Schedule_Adjust</servlet-class>
     </servlet>
 
 
@@ -48,6 +55,12 @@
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+    
+    <servlet-mapping>
+        <servlet-name>Schedule_Adjust</servlet-name>
+        <url-pattern>/servlet/Schedule_Adjust/</url-pattern>
     </servlet-mapping>
 
 </web-app>
